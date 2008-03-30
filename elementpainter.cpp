@@ -67,20 +67,22 @@ void ElementPainter::mouseReleaseEvent(QMouseEvent *e)
 {
     Q_UNUSED(e)
     m_svgPath = KFileDialog::getOpenFileName(KUrl("kfiledialog:///plasma-theme"), "*.svg *.svgz", this);
-//     kDebug() << "released";
+    kDebug() << "selected file" << m_svgPath;
     refresh();
 }
 
 void ElementPainter::paintEvent(QPaintEvent *pe)
 {
-    Q_UNUSED(pe)
     QPainter p(this);
-//     p.begin(this);
 
     if (m_svgPath.isEmpty()) {
-        p.setPen(Qt::black);
         kDebug() << "no file to be loaded. write some info text";
-        p.drawText(0, 0, "Click here to load an SVG file for this");
+        KIcon icon("file-broken");
+        p.drawPixmap(width()/2-64, height()/2-64, icon.pixmap(128, 128));
+
+        // TODO: make this text draw..
+//         painter.drawText(0, 0, "Click here to load an SVG file for this");
+
         return;
     }
 
@@ -88,6 +90,6 @@ void ElementPainter::paintEvent(QPaintEvent *pe)
         m_panelRenderer->paint(&p, QRect(0, 0, width(), height()));
     }
 
-    p.end();
+    QWidget::paintEvent(pe);
 }
 
