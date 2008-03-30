@@ -7,6 +7,7 @@
   (at your option) any later version.
 */
 
+#include <QtGui>
 #include <Plasma/Theme>
 #include <Plasma/Svg>
 
@@ -32,10 +33,12 @@ void ElementPainter::refresh()
 
 }
 
-void ElementPainter::paintEvent(QPainter *p)
+void ElementPainter::paintEvent(QPaintEvent *pe)
 {
+    QPainter p;
     if (m_type == "background") {
-        m_renderer->paint(p, QRect(0, 0, width(), height()));
+        m_renderer->paint(&p, QRect(0, 0, width(), height()));
     }
+   
 }
 

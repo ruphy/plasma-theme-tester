@@ -12,7 +12,7 @@
 
 #include <QWidget>
 
-class QPainter;
+class QPaintEvent;
 class QString;
 class Plasma::Svg;
 
@@ -25,7 +25,7 @@ public:
     void refresh();
 
 protected:
-    virtual void paintEvent(QPainter *p);
+    virtual void paintEvent(QPaintEvent *p);
 
 private:
     Plasma::Svg *m_renderer;
