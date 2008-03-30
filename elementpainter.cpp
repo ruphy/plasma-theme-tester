@@ -69,6 +69,7 @@ void ElementPainter::mouseReleaseEvent(QMouseEvent *e)
     m_svgPath = KFileDialog::getOpenFileName(KUrl("kfiledialog:///plasma-theme"), "*.svg *.svgz", this);
     kDebug() << "selected file" << m_svgPath;
     refresh();
+    update();
 }
 
 void ElementPainter::paintEvent(QPaintEvent *pe)
