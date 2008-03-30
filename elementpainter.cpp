@@ -10,6 +10,7 @@
 #include <QtGui>
 #include <Plasma/Theme>
 #include <Plasma/Svg>
+#include <Plasma/SvgPanel>
 
 #include <elementpainter.h>
 
@@ -21,6 +22,25 @@ ElementPainter::ElementPainter()
 void ElementPainter::setType(const QString &t)
 {
     m_type = t;
+
+    if (t == "background") {
+        if (m_panelRenderer) {
+            delete m_panelRenderer;
+        }
+
+        delete m_renderer;
+        m_renderer = 0;
+        m_panelRenderer = new Plasma::SvgPanel;
+
+    } else {
+        if (m_renderer) {
+            delete m_renderer;
+        }
+
+        delete m_panelRenderer;
+        m_panelRenderer = 0;
+        m_renderer = new Plasma::Svg;
+    }
 }
 
 QString ElementPainter::type()
@@ -37,7 +57,7 @@ void ElementPainter::paintEvent(QPaintEvent *pe)
 {
     QPainter p;
     if (m_type == "background") {
-        m_renderer->paint(&p, QRect(0, 0, width(), height()));
+        m_panelRenderer->paint(&p, QRect(0, 0, width(), height()));
     }
    
 }

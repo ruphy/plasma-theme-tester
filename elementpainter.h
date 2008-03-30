@@ -29,6 +29,7 @@ protected:
 
 private:
     Plasma::Svg *m_renderer;
+    Plasma::SvgPanel *m_panelRenderer;
     QString m_type;
 };
 
