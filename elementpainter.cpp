@@ -24,7 +24,8 @@ void ElementPainter::refresh()
 
 void ElementPainter::paintEvent(QPainter *p)
 {
-    m_renderer->paint(p);
-
+    if (m_type == "background") {
+        m_renderer->paint(p, QRect(0, 0, width(), height()));
+    }
 }
 
