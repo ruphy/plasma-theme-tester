@@ -14,18 +14,27 @@
 
 class QPaintEvent;
 class QString;
-class Plasma::Svg;
+
+namespace Plasma{
+    class Svg;
+    class SvgPanel;
+};
 
 class ElementPainter : public QWidget
 {
 public:
-    ElementPainter();
+    ElementPainter(QObject *o);
+    ~ElementPainter();
     void setType(const QString &t);
     QString type();
     void refresh();
 
+// public Q_SLOTS:
+//     void launchSvgSelector();
+
 protected:
     virtual void paintEvent(QPaintEvent *p);
+    virtual void mouseReleaseEvent(QMouseEvent *e);
 
 private:
     Plasma::Svg *m_renderer;

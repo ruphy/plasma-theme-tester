@@ -8,15 +8,27 @@
 */
 
 #include <QtGui>
+
+#include <KFileDialog>
+#include <kdebug.h>
+
 #include <Plasma/Theme>
 #include <Plasma/Svg>
 #include <Plasma/SvgPanel>
 
 #include <elementpainter.h>
 
-ElementPainter::ElementPainter()
+ElementPainter::ElementPainter(QObject *o)
 {
+    Q_UNUSED(o);
+    m_renderer = 0;
+    m_panelRenderer = 0;
+}
 
+ElementPainter::~ElementPainter()
+{
+    delete m_renderer;
+    delete m_panelRenderer;
 }
 
 void ElementPainter::setType(const QString &t)
@@ -50,11 +62,21 @@ QString ElementPainter::type()
 
 void ElementPainter::refresh()
 {
+    
+}
 
+void ElementPainter::mouseReleaseEvent(QMouseEvent *e)
+{
+    Q_UNUSED(e)
+    QString path = KFileDialog::getOpenFileName(KUrl("kfiledialog:///plasma-theme"), "*.svg *.svgz", this);
+    
+    kDebug() << "released";
 }
 
 void ElementPainter::paintEvent(QPaintEvent *pe)
 {
+    Q_UNUSED(pe)
+
     QPainter p;
     if (m_type == "background") {
         m_panelRenderer->paint(&p, QRect(0, 0, width(), height()));
