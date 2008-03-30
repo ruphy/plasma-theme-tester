@@ -13,6 +13,10 @@
 #include <KLocale>
 #include <KCmdLineArgs>
 
+#include <KMainWindow>
+
+#include "ui_mainWindow.h"
+
 int main(int argc, char *argv[])
 {
     KAboutData aboutData("PTT", 0, ki18n("Plasma Theme Tester"),
@@ -28,6 +32,11 @@ int main(int argc, char *argv[])
     KCmdLineArgs::addCmdLineOptions(options);
     KCmdLineArgs::parsedArgs();
     KApplication app;
+
+    Ui::MainWindow ui;
+    KMainWindow *mw = new KMainWindow;
+    ui.setupUi(mw);
+    mw->show();
 
     return app.exec();
 }

@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>558</width>
-    <height>499</height>
+    <width>463</width>
+    <height>492</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -17,12 +17,12 @@
     <rect>
      <x>0</x>
      <y>25</y>
-     <width>558</width>
-     <height>452</height>
+     <width>463</width>
+     <height>445</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_2" >
-    <item row="0" column="0" >
+    <item row="0" column="1" >
      <widget class="QTabWidget" name="tabWidget" >
       <property name="currentIndex" >
        <number>0</number>
@@ -32,8 +32,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>538</width>
-         <height>406</height>
+         <width>443</width>
+         <height>344</height>
         </rect>
        </property>
        <attribute name="title" >
@@ -95,14 +95,24 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>538</width>
-         <height>406</height>
+         <width>443</width>
+         <height>344</height>
         </rect>
        </property>
        <attribute name="title" >
         <string>Tab 2</string>
        </attribute>
       </widget>
+     </widget>
+    </item>
+    <item row="2" column="1" >
+     <widget class="KUrlRequester" name="kurlrequester" />
+    </item>
+    <item row="1" column="1" >
+     <widget class="QLabel" name="label" >
+      <property name="text" >
+       <string>Path:</string>
+      </property>
      </widget>
     </item>
    </layout>
@@ -112,7 +122,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>558</width>
+     <width>463</width>
      <height>25</height>
     </rect>
    </property>
@@ -131,8 +141,8 @@
    <property name="geometry" >
     <rect>
      <x>0</x>
-     <y>477</y>
-     <width>558</width>
+     <y>470</y>
+     <width>463</width>
      <height>22</height>
     </rect>
    </property>
@@ -154,6 +164,11 @@
   </action>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>KUrlRequester</class>
+   <extends>QFrame</extends>
+   <header>kurlrequester.h</header>
+  </customwidget>
   <customwidget>
    <class>ElementPainter</class>
    <extends>QWidget</extends>

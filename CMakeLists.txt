@@ -10,6 +10,8 @@ set(PTT_SRC
 
 include_directories(${KDE4_INCLUDES})
 
+kde4_add_ui_files(PTT_SRC mainWindow.ui)
+
 kde4_add_executable(PTT ${PTT_SRC})
 target_link_libraries(PTT ${KDE4_KDEUI_LIBS} plasma)
 
