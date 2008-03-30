@@ -40,6 +40,8 @@ private:
     Plasma::Svg *m_renderer;
     Plasma::SvgPanel *m_panelRenderer;
     QString m_type;
+    QString m_svgPath;
+    bool m_usePanelSvg;
 };
 
 

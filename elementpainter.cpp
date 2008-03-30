@@ -23,6 +23,7 @@ ElementPainter::ElementPainter(QObject *o)
     Q_UNUSED(o);
     m_renderer = 0;
     m_panelRenderer = 0;
+    m_svgPath = QString();
 }
 
 ElementPainter::~ElementPainter()
@@ -35,24 +36,13 @@ void ElementPainter::setType(const QString &t)
 {
     m_type = t;
 
-    if (t == "background") {
-        if (m_panelRenderer) {
-            delete m_panelRenderer;
-        }
-
-        delete m_renderer;
-        m_renderer = 0;
-        m_panelRenderer = new Plasma::SvgPanel;
-
+    if (m_type == "background") {
+        m_usePanelSvg = true;
     } else {
-        if (m_renderer) {
-            delete m_renderer;
-        }
-
-        delete m_panelRenderer;
-        m_panelRenderer = 0;
-        m_renderer = new Plasma::Svg;
+        m_usePanelSvg = false;
     }
+
+    refresh();
 }
 
 QString ElementPainter::type()
@@ -62,25 +52,42 @@ QString ElementPainter::type()
 
 void ElementPainter::refresh()
 {
+    //deleting the objects is the only way to get rid of the cache.
+    delete m_renderer; m_renderer = 0;
+    delete m_panelRenderer; m_panelRenderer = 0;
     
+    if (m_usePanelSvg) {
+        m_panelRenderer = new Plasma::SvgPanel(m_svgPath);
+    } else {
+        m_renderer = new Plasma::Svg(m_svgPath);
+    }
 }
 
 void ElementPainter::mouseReleaseEvent(QMouseEvent *e)
 {
     Q_UNUSED(e)
-    QString path = KFileDialog::getOpenFileName(KUrl("kfiledialog:///plasma-theme"), "*.svg *.svgz", this);
-    
-    kDebug() << "released";
+    m_svgPath = KFileDialog::getOpenFileName(KUrl("kfiledialog:///plasma-theme"), "*.svg *.svgz", this);
+//     kDebug() << "released";
+    refresh();
 }
 
 void ElementPainter::paintEvent(QPaintEvent *pe)
 {
     Q_UNUSED(pe)
+    QPainter p(this);
+//     p.begin(this);
 
-    QPainter p;
+    if (m_svgPath.isEmpty()) {
+        p.setPen(Qt::black);
+        kDebug() << "no file to be loaded. write some info text";
+        p.drawText(0, 0, "Click here to load an SVG file for this");
+        return;
+    }
+
     if (m_type == "background") {
         m_panelRenderer->paint(&p, QRect(0, 0, width(), height()));
     }
-   
+
+    p.end();
 }
 
