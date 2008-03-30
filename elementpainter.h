@@ -35,6 +35,7 @@ public:
 protected:
     virtual void paintEvent(QPaintEvent *p);
     virtual void mouseReleaseEvent(QMouseEvent *e);
+    virtual void resizeEvent(QResizeEvent *e);
 
 private:
     Plasma::Svg *m_renderer;

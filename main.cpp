@@ -36,6 +36,10 @@ int main(int argc, char *argv[])
     Ui::MainWindow ui;
     KMainWindow *mw = new KMainWindow;
     ui.setupUi(mw);
+
+// set all the properties...
+    ui.background->setType("background");
+
     mw->show();
 
     return app.exec();

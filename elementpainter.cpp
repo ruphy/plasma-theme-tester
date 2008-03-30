@@ -42,7 +42,7 @@ void ElementPainter::setType(const QString &t)
         m_usePanelSvg = false;
     }
 
-    refresh();
+//     refresh();
 }
 
 QString ElementPainter::type()
@@ -66,13 +66,26 @@ void ElementPainter::refresh()
 void ElementPainter::mouseReleaseEvent(QMouseEvent *e)
 {
     Q_UNUSED(e)
-    m_svgPath = KFileDialog::getOpenFileName(KUrl("kfiledialog:///plasma-theme"), "*.svg *.svgz", this);
+    QString svgPath = KFileDialog::getOpenFileName(KUrl("kfiledialog:///plasma-theme"), "*.svg *.svgz", this);
 
-    if (!m_svgPath.isEmpty()) {
+    if (!svgPath.isEmpty()) {
+        m_svgPath = svgPath;
         kDebug() << "selected file" << m_svgPath;
         refresh();
+        m_panelRenderer->resize(QSizeF(width(), height()));
         update();
     }
+}
+
+void ElementPainter::resizeEvent(QResizeEvent *e)
+{
+    if (m_panelRenderer) {
+        if (m_type == "background") {
+            m_panelRenderer->resize(QSizeF(width(), height()));
+        }
+    }
+
+    QWidget::resizeEvent(e);
 }
 
 void ElementPainter::paintEvent(QPaintEvent *pe)
@@ -91,6 +104,7 @@ void ElementPainter::paintEvent(QPaintEvent *pe)
     }
 
     if (m_type == "background") {
+        m_panelRenderer->setBorderFlags(Plasma::SvgPanel::DrawAllBorders);
         m_panelRenderer->paint(&p, QRect(0, 0, width(), height()));
     }
 

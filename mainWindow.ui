@@ -47,7 +47,7 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_4" >
            <item row="0" column="0" >
-            <widget class="ElementPainter" native="1" name="widget" />
+            <widget class="ElementPainter" native="1" name="background" />
            </item>
           </layout>
          </widget>
@@ -59,7 +59,7 @@
           </property>
           <layout class="QGridLayout" name="gridLayout_3" >
            <item row="0" column="1" >
-            <widget class="ElementPainter" native="1" name="widget_4" />
+            <widget class="ElementPainter" native="1" name="analogclock" />
            </item>
           </layout>
          </widget>
