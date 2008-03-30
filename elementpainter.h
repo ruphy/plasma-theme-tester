@@ -20,6 +20,8 @@ class ElementPainter : public QWidget
 {
 public:
     ElementPainter();
+    void setType(const QString &t);
+    QString type();
     void refresh();
 
 protected:

@@ -17,6 +17,16 @@ ElementPainter::ElementPainter()
 
 }
 
+void ElementPainter::setType(const QString &t)
+{
+    m_type = t;
+}
+
+QString ElementPainter::type()
+{
+    return m_type;
+}
+
 void ElementPainter::refresh()
 {
 
