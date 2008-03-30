@@ -25,7 +25,7 @@ protected:
     virtual void paintEvent(QPainter *p);
 
 private:
-    Plasma::Svg renderer;
+    Plasma::Svg m_renderer;
 };
 
 
